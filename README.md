@@ -13,11 +13,6 @@ Bookstore is a website similar to the "Awesome Books" website built previous in 
 
 - Libraries
   - [x] React
-  
-## Screenshot 
-
-https://user-images.githubusercontent.com/92303891/183912415-6cc28981-75b9-47c6-b6f9-b4ad50147e8c.mp4
-
 
 ## Live Demo Link
 
