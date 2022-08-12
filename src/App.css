@@ -1,0 +1,168 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,800;1,900&display=swap');
+
+* {
+  margin: 0;
+}
+
+:root {
+  --primary-color: #0290ff;
+  --secondary-color: #f5f6fa;
+}
+
+body {
+  background-color: var(--secondary-color);
+  font-family: 'Montserrat', sans-serif;
+}
+
+.App {
+  width: 85%;
+  margin: 70px auto;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+nav {
+  display: flex;
+  background-color: #fff;
+  align-self: center;
+  justify-content: space-between;
+  padding: 20px 5%;
+}
+
+nav > div {
+  display: flex;
+  gap: 10px;
+}
+
+.nav-brand {
+  color: var(--primary-color);
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.nav-list {
+  display: inline;
+  margin: auto auto;
+  list-style: none;
+}
+
+.active {
+  border-bottom: 2px solid var(--primary-color);
+}
+
+.nav-list li a {
+  font-weight: 600;
+  color: rgb(18, 18, 18);
+}
+
+.nav-list li:last-child a {
+  opacity: 0.5;
+}
+
+.nav-list li {
+  display: inline-block;
+  margin: 0 10px;
+}
+
+.user-icon {
+  margin: auto 0 auto 10px;
+}
+
+.user-icon img {
+  width: 30px;
+  height: 30px;
+}
+
+main {
+  padding: 20px 5%;
+  background-color: #fafafa;
+}
+
+.books-list {
+  display: inline;
+  list-style: none;
+  margin: 20px auto;
+}
+
+.books-list li {
+  background-color: #fff;
+  padding: 20px;
+  margin-bottom: 30px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.books-list li:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.book-title {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.book-author {
+  font-size: 14px;
+  font-weight: 500;
+  font-style: italic;
+  color: #0290ff;
+}
+
+.books-page h2 {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 50px auto 30px;
+  color: #888;
+}
+
+.add-book-form {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 3fr 1.5fr 1fr;
+  grid-gap: 20px;
+  margin: 50px auto;
+}
+
+.add-book-form input {
+  border: solid 1px #e8e8e8;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 18px;
+  font-weight: 500;
+  color: #888;
+}
+
+.add-book-form input:focus {
+  border: solid 1px var(--primary-color);
+  outline: none;
+}
+
+.add-book-form input[type="submit"] {
+  background-color: var(--primary-color);
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.categories-page {
+  background-color: #fff;
+  margin: 50px auto;
+  padding: 50px;
+}
+
+.categories-page button {
+  background-color: var(--primary-color);
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
