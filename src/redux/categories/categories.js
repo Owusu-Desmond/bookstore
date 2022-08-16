@@ -1,8 +1,7 @@
 const CHECK_STATUS = 'bookstore/categories/CHECK_STATUS';
 
-const checkStatus = (status) => ({
+const checkStatus = () => ({
   type: CHECK_STATUS,
-  status,
 });
 
 const categoriesReducer = (state = [], action) => {
