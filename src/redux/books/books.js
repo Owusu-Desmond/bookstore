@@ -1,52 +1,46 @@
-import { v4 as uuidv4 } from 'uuid';
+import axios from 'axios';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 
-const ADD_BOOK = 'bookstore/books/ADD_BOOK';
+const BASE_API_URL = 'https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/S8O9HgKmzvIzxtQkoPBR/books';
+const FETCH_BOOKS = 'bookstore/books/FETCH_BOOKS';
 const REMOVE_BOOK = 'bookstore/books/REMOVE_BOOK';
-const books = [
-  {
-    id: uuidv4(),
-    title: 'Harry Potter and the Chamber of Secrets',
-    author: 'J.K. Rowling',
-  },
-  {
-    id: uuidv4(),
-    title: 'The Hobbit',
-    author: 'J.R.R. Tolkien',
-  },
-  {
-    id: uuidv4(),
-    title: 'The Lord of the Rings',
-    author: 'J.R.R. Tolkien',
-  },
-  {
-    id: uuidv4(),
-    title: 'The Silmarillion',
-    author: 'J.R.R. Tolkien',
-  },
-];
+const ADD_BOOK = 'bookstore/books/ADD_BOOKS';
 
-const bookReducer = (state = books, action) => {
-  const index = state.findIndex((book) => book.id === action.id);
-
+const bookReducer = (state = {}, action) => {
   switch (action.type) {
-    case ADD_BOOK:
-      return [...state, action.book];
-    case REMOVE_BOOK:
-      return [...state.slice(0, index), ...state.slice(index + 1)];
+    case `${FETCH_BOOKS}/fulfilled`:
+      return { ...state, ...action.payload };
+    case `${ADD_BOOK}/fulfilled`:
+      return { ...state, [action.payload.item_id]: [action.payload] };
+    case `${REMOVE_BOOK}/fulfilled`:
+    /* make a copy of the state object and filter out
+    the book with the id that matches the action.payload */
+      return Object.keys(state).reduce((acc, key) => {
+        if (key !== action.payload) {
+          acc[key] = state[key];
+        }
+        return acc;
+      },
+      {});
     default:
       return state;
   }
 };
 
-const addBook = (book) => ({
-  type: ADD_BOOK,
-  book,
+const fetchBooks = createAsyncThunk(FETCH_BOOKS, async () => {
+  const response = await axios.get(BASE_API_URL);
+  return response.data;
 });
 
-const removeBook = (id) => ({
-  type: REMOVE_BOOK,
-  id,
+const addBook = createAsyncThunk(ADD_BOOK, async (book) => {
+  await axios.post(BASE_API_URL, book);
+  return book;
 });
 
-export { addBook, removeBook };
+const removeBook = createAsyncThunk(REMOVE_BOOK, async (id) => {
+  await axios.delete(`${BASE_API_URL}/${id}`);
+  return id;
+});
+
+export { addBook, removeBook, fetchBooks };
 export default bookReducer;

@@ -15,9 +15,10 @@ const AddBookForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const book = {
-      id: uuidv4(),
+      item_id: uuidv4(),
       title: e.target.elements.title.value,
       author: e.target.elements.author.value,
+      category: '',
     };
     dispatch(addBook(book)); // dispatch action to add book to store
     clearForm(e);
@@ -25,8 +26,8 @@ const AddBookForm = () => {
 
   return (
     <form className="add-book-form" onSubmit={handleSubmit}>
-      <input type="text" name="title" placeholder="Book title" />
-      <input type="text" name="author" placeholder="Author" />
+      <input type="text" name="title" placeholder="Book title" required />
+      <input type="text" name="author" placeholder="Author" required />
       <input type="submit" value="Add BOOK" />
     </form>
   );
