@@ -166,3 +166,45 @@ main {
   border-radius: 5px;
   cursor: pointer;
 }
+
+@media screen and (max-width: 768px) {
+  .App {
+    width: 100%;
+    margin-top: 0;
+  }
+
+  nav {
+    padding: 20px 5px;
+  }
+
+  nav > div {
+    display: flex;
+    gap: 0;
+  }
+
+  .nav-brand {
+    font-size: 20px;
+    font-weight: 900;
+  }
+
+  .nav-list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: -30px;
+  }
+
+  .user-icon img {
+    width: 25px;
+    height: 25px;
+  }
+
+  .add-book-form {
+    width: 90%;
+    grid-template-columns: 1fr;
+  }
+
+  .add-book-form input[type="submit"] {
+    width: fit-content;
+  }
+}
