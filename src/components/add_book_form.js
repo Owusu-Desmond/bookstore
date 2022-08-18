@@ -15,9 +15,10 @@ const AddBookForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const book = {
-      id: uuidv4(),
+      item_id: uuidv4(),
       title: e.target.elements.title.value,
       author: e.target.elements.author.value,
+      category: '',
     };
     dispatch(addBook(book)); // dispatch action to add book to store
     clearForm(e);
