@@ -1,52 +1,31 @@
-import { v4 as uuidv4 } from 'uuid';
+import axios from 'axios';
 
-const ADD_BOOK = 'bookstore/books/ADD_BOOK';
-const REMOVE_BOOK = 'bookstore/books/REMOVE_BOOK';
-const books = [
-  {
-    id: uuidv4(),
-    title: 'Harry Potter and the Chamber of Secrets',
-    author: 'J.K. Rowling',
-  },
-  {
-    id: uuidv4(),
-    title: 'The Hobbit',
-    author: 'J.R.R. Tolkien',
-  },
-  {
-    id: uuidv4(),
-    title: 'The Lord of the Rings',
-    author: 'J.R.R. Tolkien',
-  },
-  {
-    id: uuidv4(),
-    title: 'The Silmarillion',
-    author: 'J.R.R. Tolkien',
-  },
-];
+const BASE_URL = 'https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/S8O9HgKmzvIzxtQkoPBR/books';
+const FETCH_BOOKS = 'bookstore/books/FETCH_BOOKS';
 
-const bookReducer = (state = books, action) => {
-  const index = state.findIndex((book) => book.id === action.id);
-
+const bookReducer = (state = {}, action) => {
   switch (action.type) {
-    case ADD_BOOK:
-      return [...state, action.book];
-    case REMOVE_BOOK:
-      return [...state.slice(0, index), ...state.slice(index + 1)];
+    case FETCH_BOOKS:
+      return action.payload;
     default:
       return state;
   }
 };
 
-const addBook = (book) => ({
-  type: ADD_BOOK,
-  book,
-});
+const fetchBooks = () => async (dispatch) => {
+  const res = await axios.get(BASE_URL);
+  dispatch({ type: FETCH_BOOKS, payload: res.data });
+};
 
-const removeBook = (id) => ({
-  type: REMOVE_BOOK,
-  id,
-});
+const addBook = (book) => async (dispatch) => {
+  await axios.post(BASE_URL, book);
+  dispatch(fetchBooks());
+};
 
-export { addBook, removeBook };
+const removeBook = (id) => async (dispatch) => {
+  await axios.delete(`${BASE_URL}/${id}`);
+  dispatch(fetchBooks());
+};
+
+export { addBook, removeBook, fetchBooks };
 export default bookReducer;
